@@ -1,0 +1,18 @@
+<div class="col-md-10">
+  <form class="tab-pane active form-horizontal" multipart= true id="first" name="userForm" novalidate ng-submit="update()">
+    <h3 class="block">Add Image</h3>
+    <div class="form-group" ng-class="{'has-error' : submitted && userForm.picture_url.$invalid}">
+      <label class="control-label col-md-3">Upload Image <span class="required">* </span> </label>
+      <div class="col-md-4">
+        <input type="file"  ng-model="user.picture_url" />
+      </div>
+      <p ng-show=" submitted && userForm.picture_url.$invalid" class="help-block">Picture is required.</p>
+    </div>
+    <div class="form-group">
+      <div class="pull-left">
+        <a class="btn btn-default" href="/"> Back</a>
+        <button type="submit" class="btn btn-primary" ng-click="submitted=true">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

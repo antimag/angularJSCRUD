@@ -1,8 +1,7 @@
 <br/>
 <div class="row">
   <div class="col-md-12">
-    <a class="btn btn-primary" href="#/users/new">Create a user</a>
-    <h3 class="block">Users</h3>
+    <h3 class="block">User</h3>
     <table class="table table-striped">
       <tr>
         <th>First Name</th>
@@ -11,16 +10,18 @@
         <th>Phone</th>
         <th></th>
       </tr>
-      <tr ng-hide="users.length" >
+      <tr ng-hide="user" >
         <td colspan="5">No users found, Please create one.</td>
       </tr>
-      <tr ng-show="users.length" ng-repeat="user in users">
+      <tr ng-show="user">
         <td>{{user.first_name}}</td>
         <td>{{user.last_name}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phone}}</td>
+      </tr>
+      <tr>
         <td>
-        <a href="#/users/{{user.id}}/edit">Edit</a> |<a href="#/users/{{user.id}}/profile">User Profile</a>| <a href="#/users/{{user.id}}/add_image">Upload Image</a>|<a href="" ng-click="deleteUser(user.id)">Remove</a>
+          <a class="btn btn-default" href="/"> Back</a>
         </td>
       </tr>
     </table>

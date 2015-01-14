@@ -22,7 +22,9 @@ class UsersController < ApplicationController
   def show
     respond_with(@user.as_json)
   end
-
+  def profile
+    respond_with(@user.as_json)
+  end
   def update
     if @user.update_attributes(user_params)
       render json: @user.as_json, status: :ok
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
     @user.destroy
     render json: {status: :ok}
   end
-
+  
   private
 
   def user_params

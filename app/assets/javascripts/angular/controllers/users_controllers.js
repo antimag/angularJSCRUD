@@ -15,7 +15,16 @@ myApp.factory('User', ['$resource', function($resource){
     delete: { method: 'DELETE', params: {id: '@id'} }
   });
 }]);
-
+myApp.factory('UserProfile', ['$resource', function($resource){
+  return $resource('/users/:id/profile.json', {}, {
+    profile: {method: 'GET', isArray: false}
+  });
+}]);
+myApp.factory('UserImage', ['$resource', function($resource){
+  return $resource('/users/:id/add_image.json', {}, {
+    add_image: {method: 'PUT'}
+  });
+}]);
 //Controller
 myApp.controller("UserListCtr", ['$scope', '$http', '$resource', 'Users', 'User', '$location', function($scope, $http, $resource, Users, User, $location) {
   $scope.users = Users.query();
@@ -28,6 +37,9 @@ myApp.controller("UserListCtr", ['$scope', '$http', '$resource', 'Users', 'User'
     }
   };
 }]);
+myApp.controller('UserProfileCtr', function($scope, $resource, UserProfile, $location, $routeParams){
+  $scope.user = UserProfile.get({ id: $routeParams.id });
+});
 
 myApp.controller("UserUpdateCtr", ['$scope', '$resource', 'User', '$location', '$routeParams', function($scope, $resource, User, $location, $routeParams) {
   $scope.user = User.get({id: $routeParams.id})
@@ -89,6 +101,14 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   });
   $routeProvider.when('/users/:id/edit', {
     templateUrl: '/templates/users/edit.html',
+    controller: "UserUpdateCtr"
+  });
+  $routeProvider.when('/users/:id/profile', {
+    templateUrl: '/templates/users/profile.html',
+    controller: "UserProfileCtr"
+  });
+  $routeProvider.when('/users/:id/add_image', {
+    templateUrl: '/templates/users/add_image.html',
     controller: "UserUpdateCtr"
   });
   $routeProvider.otherwise({
