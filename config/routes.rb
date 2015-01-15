@@ -3,7 +3,13 @@ CrudWithAngularjs::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :users
+  resources :users do
+    member do
+      get :profile
+      get :add_image
+      put :add_image
+    end
+  end
   root 'users#index'
 
   # Example of regular route:
